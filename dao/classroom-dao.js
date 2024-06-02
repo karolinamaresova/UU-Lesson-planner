@@ -35,7 +35,7 @@ function update(classroom) {
     const currentClassroom = get(classroom.id);
     if (!currentClassroom) return null;
     const newClassroom = { ...currentClassroom, ...classroom };
-    const filePath = path.join(cFolderPath, `${classroom.id}.json`);
+    const filePath = path.join(classroomFolderPath, `${classroom.id}.json`);
     const fileData = JSON.stringify(newClassroom);
     fs.writeFileSync(filePath, fileData, "utf8");
     return newClassroom;
@@ -72,10 +72,23 @@ function list() {
   }
 }
 
+function addSubject(classroomId, subjectId) {
+  try {
+    const classroom = get(classroomId);
+    if (!classroom) return null;
+    if (!classroom.subjects) classroom.subjects = [];
+    classroom.subjects.push(subjectId);
+    return update(classroom);
+  } catch (error) {
+    throw { code: "failedToAddSubjectToClassroom", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   create,
   update,
   remove,
   list,
+  addSubject 
 };

@@ -8,10 +8,11 @@ const userDao = require("../../dao/user-dao.js");
 const schema = {
   type: "object",
   properties: {
-    id: { type: "string", minLength: 32, maxLength: 32 },
     name: { type: "string", minLength: 3 },
     surname: { type: "string", minLength: 3 },
     email: { type: "string", format: "email" },
+    role : { type: "string", enum: ["admin", "teacher"] },
+    subject_id: { type: "array", items: { type: "string", minLength: 32 }},
   },
   required: ["id"],
   additionalProperties: false,

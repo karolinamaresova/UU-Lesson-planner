@@ -7,15 +7,15 @@ const validateDateTime = require("../../helpers/validate-date-time.js");
 ajv.addFormat("date-time", { validate: validateDateTime });
 
 const subjectDao = require("../../dao/subject-dao.js");
+const classroomDao = require("../../dao/classroom-dao.js");
 
 const schema = {
   type: "object",
   properties: {
     name: { type: "string", minLength: 3 },
-    surname: { type: "string", minLength: 3 },
-    email: { type: "string", format: "email" },
+    classroom_id: { type: "string", minLength: 32 },
   },
-  required: ["name", "surname", "email"],
+  required: ["name", "classroom_id"],
   additionalProperties: false,
 };
 
@@ -37,6 +37,7 @@ async function CreateAbl(req, res) {
     
 
     subject = subjectDao.create(subject);
+    classroomDao.addSubject(subject.classroom_id, subject.id);
     res.json(subject);
   } catch (e) {
     res.status(500).json({ message: e.message });

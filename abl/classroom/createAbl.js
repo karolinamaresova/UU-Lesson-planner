@@ -11,7 +11,7 @@ const classroomDao = require("../../dao/classroom-dao.js");
 const schema = {
   type: "object",
   properties: {
-    label: { type: "string" }
+    label: { type: "string" },
     
     
     

@@ -11,11 +11,16 @@ const scheduleDao = require("../../dao/schedule-dao.js");
 const schema = {
   type: "object",
   properties: {
-    name: { type: "string", minLength: 3 },
-    surname: { type: "string", minLength: 3 },
-    email: { type: "string", format: "email" },
+    user_id: { type: "string", minLength: 32 },
+    student_id: { type: "string", minLength: 32 },
+    subject_id: { type: "string", minLength: 32 },
+    classroom_id: { type: "string", minLength: 32 },
+    datetime: { type: "string", format: "date-time" },
+    duration: { type: "number" },
+    note: { type: "string" },
+    
   },
-  required: ["name", "surname", "email"],
+  required: ["user_id", "student_id", "subject_id", "classroom_id", "datetime", "duration"],
   additionalProperties: false,
 };
 
