@@ -2,49 +2,49 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-const userFolderPath = path.join(__dirname, "storage", "userList");
+const classroomFolderPath = path.join(__dirname, "storage", "classroomList");
 
-// Method to read an user from a file
+// Method to read an classroom from a file
 function get(classroomId) {
   try {
-    const filePath = path.join(userFolderPath, `${classroomId}.json`);
+    const filePath = path.join(classroomFolderPath, `${classroomId}.json`);
     const fileData = fs.readFileSync(filePath, "utf8");
     return JSON.parse(fileData);
   } catch (error) {
     if (error.code === "ENOENT") return null;
-    throw { code: "failedToReadUser", message: error.message };
+    throw { code: "failedToReadClassroom", message: error.message };
   }
 }
 
-// Method to write an user to a file
+// Method to write an classroom to a file
 function create(classroom) {
   try {
-    user.id = crypto.randomBytes(16).toString("hex");
-    const filePath = path.join(userFolderPath, `${classroom.id}.json`);
-    const fileData = JSON.stringify(user);
+    classroom.id = crypto.randomBytes(16).toString("hex");
+    const filePath = path.join(classroomFolderPath, `${classroom.id}.json`);
+    const fileData = JSON.stringify(classroom);
     fs.writeFileSync(filePath, fileData, "utf8");
-    return user;
+    return classroom;
   } catch (error) {
-    throw { code: "failedToCreateUser", message: error.message };
+    throw { code: "failedToCreateClassroom", message: error.message };
   }
 }
 
-// Method to update user in a file
+// Method to update classroom in a file
 function update(classroom) {
   try {
-    const currentUser = get(classroom.id);
-    if (!currentUser) return null;
-    const newUser = { ...currentUser, ...user };
-    const filePath = path.join(userFolderPath, `${classroom.id}.json`);
-    const fileData = JSON.stringify(newUser);
+    const currentClassroom = get(classroom.id);
+    if (!currentClassroom) return null;
+    const newClassroom = { ...currentClassroom, ...classroom };
+    const filePath = path.join(cFolderPath, `${classroom.id}.json`);
+    const fileData = JSON.stringify(newClassroom);
     fs.writeFileSync(filePath, fileData, "utf8");
     return newClassroom;
   } catch (error) {
-    throw { code: "failedToUpdateUser", message: error.message };
+    throw { code: "failedToUpdateClassroom", message: error.message };
   }
 }
 
-// Method to remove an user from a file
+// Method to remove an classroom from a file
 function remove(classroomId) {
   try {
     const filePath = path.join(classroomFolderPath, `${classroomId}.json`);
@@ -54,11 +54,11 @@ function remove(classroomId) {
     if (error.code === "ENOENT") {
       return {};
     }
-    throw { code: "failedToRemoveUser", message: error.message };
+    throw { code: "failedToRemoveClassroom", message: error.message };
   }
 }
 
-// Method to list users in a folder
+// Method to list classrooms in a folder
 function list() {
   try {
     const files = fs.readdirSync(classroomFolderPath);
@@ -68,7 +68,7 @@ function list() {
     });
     return classroomList;
   } catch (error) {
-    throw { code: "failedToListUsers", message: error.message };
+    throw { code: "failedToListClassrooms", message: error.message };
   }
 }
 
