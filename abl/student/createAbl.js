@@ -14,10 +14,11 @@ const schema = {
     name: { type: "string", minLength: 3 },
     surname: { type: "string", minLength: 3 },
     email: { type: "string", format: "email" },
-    date_of_birth: { type: "date" },
+    date_of_birth:{ type:"string", format:"date-time"},
+    
     note: { type: "string", format: "email" },
   },
-  required: ["name", "surname", "email","date_of_birth"],
+  required: ["name", "surname", "email"],
   additionalProperties: false,
 };
 
