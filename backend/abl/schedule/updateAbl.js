@@ -3,7 +3,7 @@ const addFormats = require("ajv-formats").default;
 const ajv = new Ajv();
 addFormats(ajv);
 
-const lessonDao = require("../../dao/lesson-dao.js");
+const scheduleDao = require("../../dao/schedule-dao.js");
 
 const schema = {
   type: "object",
@@ -22,10 +22,10 @@ const schema = {
 
 async function UpdateAbl(req, res) {
   try {
-    let lesson = req.body;
+    let schedule = req.body;
 
     // validate input
-    const valid = ajv.validate(schema, lesson);
+    const valid = ajv.validate(schema, schedule);
     if (!valid) {
       res.status(400).json({
         code: "dtoInIsNotValid",
@@ -35,16 +35,16 @@ async function UpdateAbl(req, res) {
       return;
     }
 
-    const updatedLesson = lessonDao.update(lesson);
-    if (!updatedLesson) {
+    const updatedSchedule = scheduleDao.update(schedule);
+    if (!updatedSchedule) {
       res.status(404).json({
-        code: "lessonNotFound",
-        message: `Lesson ${lesson.id} not found`,
+        code: "scheduleNotFound",
+        message: `Schedule ${schedule.id} not found`,
       });
       return;
     }
 
-    res.json(updatedLesson);
+    res.json(updatedSchedule);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

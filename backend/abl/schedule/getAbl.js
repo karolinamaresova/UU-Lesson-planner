@@ -1,8 +1,7 @@
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
-const lessonDao = require("../../dao/lesson-dao.js");
-const attendanceDao = require("../../dao/attendance-dao.js");
+const scheduleDao = require("../../dao/schedule-dao.js");
 
 const schema = {
   type: "object",
@@ -13,10 +12,10 @@ const schema = {
   additionalProperties: false,
 };
 
-async function DeleteAbl(req, res) {
+async function GetAbl(req, res) {
   try {
     // get request query or body
-    const reqParams = req.body;
+    const reqParams = req.query?.id ? req.query : req.body;
 
     // validate input
     const valid = ajv.validate(schema, reqParams);
@@ -29,20 +28,20 @@ async function DeleteAbl(req, res) {
       return;
     }
 
-    const attendanceMap = attendanceDao.lessonMap();
-    if (attendanceMap[reqParams.id]) {
-      res.status(400).json({
-        code: "lessonHasAttendances",
-        message: `Lesson ${reqParams.id} has attendances`,
+    // read schedule by given id
+    const schedule = scheduleDao.get(reqParams.id);
+    if (!schedule) {
+      res.status(404).json({
+        code: "scheduleNotFound",
+        message: `Schedule ${reqParams.id} not found`,
       });
       return;
     }
-    lessonDao.remove(reqParams.id);
 
-    res.json({});
+    res.json(schedule);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
 }
 
-module.exports = DeleteAbl;
+module.exports = GetAbl;

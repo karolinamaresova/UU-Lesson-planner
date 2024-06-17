@@ -6,7 +6,7 @@ addFormats(ajv);
 const validateDateTime = require("../../helpers/validate-date-time.js");
 ajv.addFormat("date-time", { validate: validateDateTime });
 
-const lessonDao = require("../../dao/lesson-dao.js");
+const scheduleDao = require("../../dao/schedule-dao.js");
 
 const schema = {
   type: "object",
@@ -26,10 +26,10 @@ const schema = {
 
 async function CreateAbl(req, res) {
   try {
-    let lesson = req.body;
+    let schedule = req.body;
 
     // validate input
-    const valid = ajv.validate(schema, lesson);
+    const valid = ajv.validate(schema, schedule);
     if (!valid) {
       res.status(400).json({
         code: "dtoInIsNotValid",
@@ -39,8 +39,8 @@ async function CreateAbl(req, res) {
       return;
     }
 
-    lesson = lessonDao.create(lesson);
-    res.json(lesson);
+    schedule = scheduleDao.create(schedule);
+    res.json(schedule);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

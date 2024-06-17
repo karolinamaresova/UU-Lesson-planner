@@ -1,9 +1,9 @@
-const lessonDao = require("../../dao/lesson-dao.js");
+const scheduleDao = require("../../dao/schedule-dao.js");
 
 async function ListAbl(req, res) {
   try {
-    const lessonList = lessonDao.list();
-    res.json(lessonList);
+    const scheduleList = scheduleDao.list();
+    res.json(scheduleList);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
