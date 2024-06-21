@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
 
+//import NavBar from "./NavBar";
+
 export default function  Layout () {
   return (
-    <div>
-      <h1>Layout</h1>
+    <>
+    <div className="card-header">
+        
+      <h1>Menu</h1>
       <Outlet />
     </div>
+    
+  </>
   );
 }

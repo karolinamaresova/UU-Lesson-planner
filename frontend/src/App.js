@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./Layout";
@@ -16,6 +17,8 @@ import ClassroomListProvider from "./Providers/ClassroomListProvider";
 
 
 
+
+
 export default function App() {
   return (
 <UserListProvider> 
@@ -26,13 +29,14 @@ export default function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
-                  <Route index element={<StudentList />} />
+                  <Route index element={<LessonList />} />
                   <Route path="lesson" element={<LessonList />} />
                   <Route path="classroom" element={<ClassroomList />} />
                   <Route path="subject" element={<SubjectList />} />
                   <Route path="student" element={<StudentList />} />
                   <Route path="user" element={<UserList />} />
                   <Route path="*" element={"not found"} />
+  
               </Route>
             </Routes>
           </BrowserRouter>
