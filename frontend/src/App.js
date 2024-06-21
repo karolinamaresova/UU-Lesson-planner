@@ -12,7 +12,10 @@ import UserList from "./UserList";
 import UserListProvider from "./Providers/UserListProvider";
 import ClassroomList from "./ClassroomList";
 import ClassroomListProvider from "./Providers/ClassroomListProvider";
+import NavBar from './NavBar';
 //import { SubjectListContext } from "./Context/SubjectListContext";
+
+
 
 
 
@@ -27,6 +30,7 @@ export default function App() {
      <LessonListProvider>
       <StudentListProvider>
           <BrowserRouter>
+          <NavBar />
             <Routes>
               <Route path="/" element={<Layout />}>
                   <Route index element={<LessonList />} />
