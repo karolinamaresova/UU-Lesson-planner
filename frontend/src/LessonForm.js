@@ -11,11 +11,14 @@ import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 import { StudentListContext } from "./Context/StudentListContext.js";
 import { SubjectListContext } from "./Context/SubjectListContext.js";
+import { ClassroomListContext } from "./Context/ClassroomListContext.js";
+
 
 export default function LessonForm({ setShowLessonForm }) {
   const { state, handlerMap } = useContext(LessonListContext);
   const { studentList } = useContext(StudentListContext);
   const { subjectList } = useContext(SubjectListContext);
+  const { classroomList } = useContext(ClassroomListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
 
@@ -66,6 +69,7 @@ export default function LessonForm({ setShowLessonForm }) {
               required
 
             >
+              
             </Form.Select>
           </Form.Group>
 
@@ -105,6 +109,9 @@ export default function LessonForm({ setShowLessonForm }) {
               required
              
             >
+                {classroomList.map((classroom) => (
+                    <option key={classroom.id} value={classroom.id}>{classroom.label} </option>
+                ))} 
             </Form.Select>
           </Form.Group>
           

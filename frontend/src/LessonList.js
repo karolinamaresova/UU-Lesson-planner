@@ -16,7 +16,7 @@ export default function LessonList() {
     <Container>
       <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
         <Button variant="success" onClick={() => setShowLessonForm({})}>
-          <Icon path={mdiPlusBoxOutline} size={1} color={"white"} /> Add student
+          <Icon path={mdiPlusBoxOutline} size={1} color={"white"} /> Add lesson
         </Button>
         
       </div>
