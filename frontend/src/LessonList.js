@@ -1,6 +1,14 @@
+
+
 import { useContext, useState } from "react";
+import Table from 'react-bootstrap/Table';
 
 import { LessonListContext } from "./Context/LessonListContext.js";
+import { UserListContext } from "./Context/UserListContext.js";
+import { StudentListContext } from "./Context/StudentListContext.js";
+import { SubjectListContext } from "./Context/SubjectListContext.js";
+import { ClassroomListContext } from "./Context/ClassroomListContext.js";
+
 
 import Button from "react-bootstrap/esm/Button.js";
 import Container from "react-bootstrap/esm/Container.js";
@@ -8,8 +16,16 @@ import Icon from "@mdi/react";
 import { mdiPlusBoxOutline, mdiPlusBoxMultipleOutline } from "@mdi/js";
 import LessonForm from "./LessonForm.js";
 
+
+
+
 export default function LessonList() {
   const { lessonList } = useContext(LessonListContext);
+  const { userList } = useContext(UserListContext);
+  const { studentList } = useContext(StudentListContext);
+  const { subjectList } = useContext(SubjectListContext);
+  const { classroomList } = useContext(ClassroomListContext);
+  
   const [showLessonForm, setShowLessonForm] = useState(false);
 
   return (
@@ -23,12 +39,13 @@ export default function LessonList() {
       {!!showLessonForm ? (
         <LessonForm lesson={showLessonForm} setShowLessonForm={setShowLessonForm} />
       ) : null}
-    
-      <table className="table">
-            <thead>
+
+
+<Table striped bordered hover responsive>
+          <thead>
                 <tr>
                     
-                    <th>User ID</th>
+                    <th>Teacher name</th>
                     <th>Student ID</th>
                     <th>Subject ID</th>
                     <th>Classroom ID</th>
@@ -40,18 +57,18 @@ export default function LessonList() {
             <tbody>         
             {lessonList.map((lesson) => (
                 <tr key={lesson.id}>
-                    <td>{lesson.user_id}</td>
-                    <td>{lesson.student_id}</td>
-                    <td>{lesson.subject_id}</td>
-                    <td>{lesson.classroom_id}</td>
-                    <td>{lesson.lesson_date}</td>
+                    <td>{userList.find(x => x.id === lesson.user_id)?.surname}</td>
+                    <td>{studentList.find(x => x.id === lesson.student_id)?.surname}</td>
+                    <td>{subjectList.find(x => x.id === lesson.subject_id)?.name}</td>
+                    <td>{classroomList.find(x => x.id === lesson.classroom_id)?.label}</td>
+                    <td>{lesson.datetime}</td>
                     <td>{lesson.duration}</td>
                     <td>{lesson.note}</td>
                 </tr>
 
             ))}
             </tbody>
-        </table>
+        </Table>
     </Container>
   ); 
 }

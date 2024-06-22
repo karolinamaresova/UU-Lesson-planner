@@ -14,7 +14,7 @@ export default function LessonListProvider({ children }) {
 
   async function handleLoad() {
     setLessonLoadObject((current) => ({ ...current, state: "pending" }));
-    const response = await fetch(`http://localhost:8000/schedule/list`, {
+    const response = await fetch(`http://localhost:8000/lesson/list`, {
       method: "GET",
     });
     const responseJson = await response.json();

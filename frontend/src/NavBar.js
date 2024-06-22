@@ -1,10 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav'
+import { IoSchoolOutline } from "react-icons/io5";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './NavBar.css';
+
+
+
+
 
 export default function NavBar() {
     return (
-        <Nav fill variant="tabs" defaultActiveKey="/">
+        <Nav className="navbar" fill variant="pills" defaultActiveKey="/">
+            <Nav.Item>
+            <h1><IoSchoolOutline /></h1>
+ 
+            </Nav.Item>
             <Nav.Item>
                 <Link to="/" className="nav-link">LessonList</Link>
             </Nav.Item>
@@ -20,6 +31,8 @@ export default function NavBar() {
             <Nav.Item>
                 <Link to="/user" className="nav-link">UserList</Link>
             </Nav.Item>
+            
         </Nav>
+        
     )
 }

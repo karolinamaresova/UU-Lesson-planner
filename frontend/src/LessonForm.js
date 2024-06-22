@@ -10,14 +10,18 @@ import Alert from "react-bootstrap/Alert";
 import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 import { StudentListContext } from "./Context/StudentListContext.js";
+import { UserListContext } from "./Context/UserListContext.js";
 import { SubjectListContext } from "./Context/SubjectListContext.js";
 import { ClassroomListContext } from "./Context/ClassroomListContext.js";
+
+
 
 
 export default function LessonForm({ setShowLessonForm }) {
   const { state, handlerMap } = useContext(LessonListContext);
   const { studentList } = useContext(StudentListContext);
   const { subjectList } = useContext(SubjectListContext);
+  const { userList } = useContext(UserListContext);
   const { classroomList } = useContext(ClassroomListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
@@ -29,7 +33,7 @@ export default function LessonForm({ setShowLessonForm }) {
           e.preventDefault();
           e.stopPropagation();
           var formData = Object.fromEntries(new FormData(e.target));
-          // formData.date = new Date(formData.date).toISOString();
+          formData.duration = (Number(formData.duration));
           try {
            await handlerMap.handleCreate(formData);
         
@@ -69,6 +73,9 @@ export default function LessonForm({ setShowLessonForm }) {
               required
 
             >
+              {userList.map((user) => (
+              <option key={user.id} value={user.id}>{user.name} {user.surname}</option>
+          ))} 
               
             </Form.Select>
           </Form.Group>
@@ -116,7 +123,7 @@ export default function LessonForm({ setShowLessonForm }) {
           </Form.Group>
           
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Date</Form.Label>
+            <Form.Label>Lesson Date</Form.Label>
             <Form.Control
               type="datetime-local"
               name="datetime"
@@ -127,7 +134,7 @@ export default function LessonForm({ setShowLessonForm }) {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Duration</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="duration"
               required
               
@@ -139,10 +146,11 @@ export default function LessonForm({ setShowLessonForm }) {
             <Form.Control
               type="text"
               name="note"
-              // required
+              //required
               
             />
           </Form.Group>
+          
         </Modal.Body>
         <Modal.Footer>
           <Button

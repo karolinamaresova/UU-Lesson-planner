@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
 
 import Layout from "./Layout";
 import StudentList from "./StudentList";

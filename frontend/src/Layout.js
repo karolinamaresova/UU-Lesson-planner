@@ -7,7 +7,7 @@ export default function  Layout () {
     <>
     <div className="card-header">
         
-      <h1>Menu</h1>
+      
       <Outlet />
     </div>
     

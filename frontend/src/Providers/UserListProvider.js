@@ -64,7 +64,7 @@ export default function UserListProvider({ children }) {
 
   const value = {
     state: userLoadObject.state,
-    usertList: userLoadObject.data || [],
+    userList: userLoadObject.data || [],
     handlerMap: { handleCreate },
   };
 

@@ -1,0 +1,21 @@
+/* TableComponent.css */
+
+.custom-table {
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.custom-table thead th {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    font-weight: bold;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+.custom-table tbody td {
+    padding: 10px;
+}
