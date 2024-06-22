@@ -68,7 +68,7 @@ export default function ClassroomForm({ setShowClassroomForm }) {
         <Modal.Footer>
           <Button
             variant="secondary"
-            onClick={() => setShowFormClassroom(false)}
+            onClick={() => setShowClassroomForm(false)}
             disabled={isPending}
           >
             Close

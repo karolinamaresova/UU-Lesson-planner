@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 
 import { UserListContext } from "./Context/UserListContext.js";
+import { SubjectListContext } from "./Context/SubjectListContext.js";
 
 import Button from "react-bootstrap/esm/Button.js";
 import Container from "react-bootstrap/esm/Container.js";
@@ -8,9 +9,11 @@ import Icon from "@mdi/react";
 import { mdiPlusBoxOutline, mdiPlusBoxMultipleOutline } from "@mdi/js";
 import UserForm from "./UserForm.js";
 
+
 export default function UserList() {
   const { userList } = useContext(UserListContext);
   const [showUserForm, setShowUserForm] = useState(false);
+  const { subjectList } = useContext(SubjectListContext);
 
   return (
     <Container>
@@ -44,6 +47,7 @@ export default function UserList() {
                     <td>{user.surname}</td>
                     <td>{user.email}</td>
                     <td>{user.role}</td>
+                    
                     <td>{user.subject_id}</td>
                     
                 </tr>

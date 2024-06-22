@@ -35,7 +35,7 @@ export default function LessonListProvider({ children }) {
   async function handleCreate(dtoIn) {
     setLessonLoadObject((current) => ({ ...current, state: "pending" }));
     console.log(dtoIn);
-    const response = await fetch(`http://localhost:8000/student/create`, {
+    const response = await fetch(`http://localhost:8000/lesson/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

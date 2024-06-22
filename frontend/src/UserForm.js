@@ -103,7 +103,7 @@ export default function UserForm({ setShowUserForm }) {
             <Form.Select
               type="select"
               name="subject_id"
-              required
+              //required
              
             >
                 {subjectList.map((subject) => (
