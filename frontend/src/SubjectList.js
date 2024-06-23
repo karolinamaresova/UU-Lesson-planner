@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
+import Table from 'react-bootstrap/Table';
 
 import { SubjectListContext } from "./Context/SubjectListContext.js";
+import { ClassroomListContext } from "./Context/ClassroomListContext.js";
+
 
 import Button from "react-bootstrap/esm/Button.js";
 import Container from "react-bootstrap/esm/Container.js";
@@ -10,6 +13,7 @@ import SubjectForm from "./SubjectForm.js";
 
 export default function SubjectList() {
   const { subjectList } = useContext(SubjectListContext);
+  const { classroomList } = useContext(ClassroomListContext);
   
   const [showSubjectForm, setShowSubjectForm] = useState(false);
 
@@ -25,7 +29,7 @@ export default function SubjectList() {
         <SubjectForm subject={showSubjectForm} setShowSubjectForm={setShowSubjectForm} />
       ) : null}
     
-      <table className="table">
+    <Table striped bordered hover responsive>
             <thead>
                 <tr>
                     
@@ -38,13 +42,13 @@ export default function SubjectList() {
             {subjectList.map((subject) => (
                 <tr key={subject.id}>
                     <td>{subject.name}</td>
-                    <td>{subject.classroom_id}</td>
+                    <td>{classroomList.find(x => x.id === subject.classroom_id)?.label}</td>
                     
                 </tr>
 
             ))}
             </tbody>
-        </table>
+        </Table>
     </Container>
   ); 
 }

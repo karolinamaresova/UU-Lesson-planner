@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import Table from 'react-bootstrap/Table';
 
 import { StudentListContext } from "./Context/StudentListContext.js";
 
@@ -24,7 +25,7 @@ export default function StudentList() {
         <StudentForm student={showStudentForm} setShowStudentForm={setShowStudentForm} />
       ) : null}
     
-      <table className="table">
+    <Table striped bordered hover responsive>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -44,7 +45,7 @@ export default function StudentList() {
 
             ))}
             </tbody>
-        </table>
+        </Table>
     </Container>
   ); 
 }

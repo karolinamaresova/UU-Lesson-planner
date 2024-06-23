@@ -1,4 +1,6 @@
+
 import { useContext, useState } from "react";
+import Table from 'react-bootstrap/Table';
 
 import { UserListContext } from "./Context/UserListContext.js";
 import { SubjectListContext } from "./Context/SubjectListContext.js";
@@ -15,6 +17,11 @@ export default function UserList() {
   const [showUserForm, setShowUserForm] = useState(false);
   const { subjectList } = useContext(SubjectListContext);
 
+
+
+
+
+
   return (
     <Container>
       <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
@@ -27,7 +34,7 @@ export default function UserList() {
         <UserForm user={showUserForm} setShowUserForm={setShowUserForm} />
       ) : null}
     
-      <table className="table">
+    <Table striped bordered hover responsive>
             <thead>
                 <tr>
                     
@@ -35,7 +42,7 @@ export default function UserList() {
                     <th>surname</th>
                     <th>email</th>
                     <th>role</th>
-                    <th>subject ID</th>
+                    <th>subject </th>
                     
                     
                 </tr>
@@ -47,14 +54,22 @@ export default function UserList() {
                     <td>{user.surname}</td>
                     <td>{user.email}</td>
                     <td>{user.role}</td>
+                    <td>{user.subject_id.map((subjectId, index) => (
+                        <span key={subjectId}>
+                        {subjectList.find(subject => subject.id === subjectId)?.name}
+                        {index !== user.subject_id.length - 1 ? ', ' : ''}
+                        </span>
+                        ))}
+                  </td>
                     
-                    <td>{user.subject_id}</td>
-                    
+                   
                 </tr>
 
             ))}
             </tbody>
-        </table>
+        </Table>
     </Container>
+    
   ); 
 }
+

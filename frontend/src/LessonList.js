@@ -45,10 +45,10 @@ export default function LessonList() {
           <thead>
                 <tr>
                     
-                    <th>Teacher name</th>
-                    <th>Student ID</th>
-                    <th>Subject ID</th>
-                    <th>Classroom ID</th>
+                    <th>Teacher </th>
+                    <th>Student </th>
+                    <th>Subject </th>
+                    <th>Classroom </th>
                     <th>Lesson Date</th>
                     <th>Duration</th>
                     <th>Note</th>
@@ -57,7 +57,7 @@ export default function LessonList() {
             <tbody>         
             {lessonList.map((lesson) => (
                 <tr key={lesson.id}>
-                    <td>{userList.find(x => x.id === lesson.user_id)?.surname}</td>
+                    <td>{userList.find(x => x.id === lesson.user_id)?.name} {userList.find(x => x.id === lesson.user_id)?.surname}</td>
                     <td>{studentList.find(x => x.id === lesson.student_id)?.surname}</td>
                     <td>{subjectList.find(x => x.id === lesson.subject_id)?.name}</td>
                     <td>{classroomList.find(x => x.id === lesson.classroom_id)?.label}</td>
