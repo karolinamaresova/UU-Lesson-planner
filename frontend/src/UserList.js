@@ -24,7 +24,7 @@ export default function UserList() {
 
   return (
     <Container>
-      <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px", marginTop:"30px"}}>
         <Button variant="success" onClick={() => setShowUserForm({})}>
           <Icon path={mdiPlusBoxOutline} size={1} color={"white"} /> Add user
         </Button>
@@ -34,7 +34,7 @@ export default function UserList() {
         <UserForm user={showUserForm} setShowUserForm={setShowUserForm} />
       ) : null}
     
-    <Table striped bordered hover responsive>
+    <Table striped bordered hover responsive style={{ marginTop: "30px" }}>
             <thead>
                 <tr>
                     
